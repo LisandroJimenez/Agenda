@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favoritos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="/styles/styles-contacto.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/favoritos.html">Favoritos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contactos.html"><i class="fas fa-user"></i> Contactos</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/perfil.html"><i class="fas fa-user-circle"></i> Perfil</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="contact-item" data-contact-id="2">
+            <div class="contact-info">
+                <span class="contact-name">
+                    Carlos Hernandez
+                    <span class="stars">
+                        <i class="fas fa-star"></i>
+
+                    </span>
+                </span>
+                <span>+502 48398443</span>
+                <span>HerCarlos@outlook.com</span>
+            </div>
+            <div class="contact-actions">
+                <a href="detalles.html?id=2" class="btn">
+                    <img src="/assets/imgs/carlos.png" alt="Editar" class="edit-icon">
+                </a>
+            </div>
+        </div>
+
+        <div class="contact-item" data-contact-id="4">
+            <div class="contact-info">
+                <span class="contact-name">
+                    Javier López
+                    <span class="stars">
+                        <i class="fas fa-star"></i>
+                    </span>
+                </span>
+                <span>+502 37749383</span>
+                <span>javiiiih@gmail.com</span>
+            </div>
+            <div class="contact-actions">
+                <a href="detalles.html?id=4" class="btn">
+                    <img src="/assets/imgs/javier.png" alt="Editar" class="edit-icon">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/contactos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
