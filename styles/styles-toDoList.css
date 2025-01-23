@@ -130,17 +130,4 @@ body {
     background: linear-gradient(90deg, #6f90b3, #132e4b);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-.btn-primary-2 {
-    background: linear-gradient(90deg, #ff0000, #005bbd);
-    border: none;
-    transition: all 0.3s ease;
-    padding: 12px 20px;
-    font-size: 16px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
 
-.btn-primary-2:hover {
-    background: linear-gradient(90deg, #a73333, #03274d);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}

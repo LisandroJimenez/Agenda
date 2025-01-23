@@ -1,8 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById('addTaskBtn').addEventListener('click', addTask);
+    loadTasks(); 
+    document.getElementById('addTaskBtn').addEventListener('click', handleSaveTask);
 });
 
 let tasks = [];
+let editTaskId = null; 
+
+function handleSaveTask() {
+    if (editTaskId) {
+        updateTask(); 
+    } else {
+        addTask(); 
+    }
+}
 
 function addTask() {
     const taskInput = document.getElementById('floatingInputGrid').value.trim();
@@ -20,27 +30,26 @@ function addTask() {
     };
 
     tasks.push(task);
-    tasks.sort((a, b) => a.priority - b.priority); // Ordenar tareas por prioridad
+    tasks.sort((a, b) => a.priority - b.priority); 
 
+    saveTasks(); 
     renderTasks();
-    document.getElementById('floatingInputGrid').value = ''; // Limpiar el campo
+    clearForm();
 }
 
 function renderTasks() {
     const taskList = document.querySelector('.task-list');
-    taskList.innerHTML = ''; // Limpiar la lista antes de renderizar
+    taskList.innerHTML = ''; 
 
     tasks.forEach(task => {
         const taskDiv = document.createElement('div');
         taskDiv.classList.add('task-item', 'd-flex', 'justify-content-between', 'align-items-center', 'contact-item');
         taskDiv.innerHTML = `
-
-            <div class="task-list">
-                <p class="task-text mt-5">${task.description} <span class="priority badge bg-${task.priority === 1 ? 'danger' : 'secondary'}">${task.priority === 1 ? 'Alto' : 'Bajo'}</span></p>
+            <div class="task-list" onclick="populateForm(${task.id})">
+                <p class="task-text">${task.description} <span class="priority badge bg-${task.priority === 1 ? 'danger' : 'secondary'}">${task.priority === 1 ? 'Alto' : 'Bajo'}</span></p>
             </div>
 
             <div>
-                <button class="btn btn-warning btn-sm edit-btn" onclick="editTask(${task.id})"><i class="fas fa-edit"></i></button>
                 <button class="btn btn-danger btn-sm delete-btn" onclick="deleteTask(${task.id})"><i class="fas fa-trash"></i></button>
             </div>
         `;
@@ -50,15 +59,52 @@ function renderTasks() {
 }
 
 function deleteTask(id) {
-    tasks = tasks.filter(task => task.id !== id); // Filtrar la tarea eliminada
-    renderTasks(); // Volver a renderizar
+    tasks = tasks.filter(task => task.id !== id);
+    saveTasks(); 
+    renderTasks();
 }
 
-function editTask(id) {
+function populateForm(id) {
     const task = tasks.find(t => t.id === id);
-    const newDescription = prompt("Edita la tarea:", task.description);
-    if (newDescription && newDescription.trim() !== "") {
-        task.description = newDescription.trim();
-        renderTasks();
+    document.getElementById('floatingInputGrid').value = task.description;
+    document.getElementById('floatingSelectGrid').value = task.priority;
+    editTaskId = id;
+    document.getElementById('addTaskBtn').innerText = "Guardar Cambios"; 
+}
+
+function updateTask() {
+    const taskInput = document.getElementById('floatingInputGrid').value.trim();
+    const priority = document.getElementById('floatingSelectGrid').value;
+
+    if (taskInput === "") {
+        alert("Por favor, ingrese una tarea.");
+        return;
+    }
+
+    const taskIndex = tasks.findIndex(task => task.id === editTaskId);
+    tasks[taskIndex].description = taskInput;
+    tasks[taskIndex].priority = parseInt(priority);
+
+    saveTasks();
+    renderTasks();
+    clearForm(); 
+}
+
+function clearForm() {
+    document.getElementById('floatingInputGrid').value = '';
+    document.getElementById('floatingSelectGrid').value = '1';
+    document.getElementById('addTaskBtn').innerText = "Agregar Tarea";
+    editTaskId = null; // Restablecer el estado de edición
+}
+
+function saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function loadTasks() {
+    const storedTasks = localStorage.getItem('tasks'); 
+    if (storedTasks) {
+        tasks = JSON.parse(storedTasks); 
+        renderTasks(); 
     }
 }
