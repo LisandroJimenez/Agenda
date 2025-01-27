@@ -94,7 +94,7 @@ function clearForm() {
     document.getElementById('floatingInputGrid').value = '';
     document.getElementById('floatingSelectGrid').value = '1';
     document.getElementById('addTaskBtn').innerText = "Agregar Tarea";
-    editTaskId = null; // Restablecer el estado de edición
+    editTaskId = null; 
 }
 
 function saveTasks() {
